@@ -1,16 +1,17 @@
 'use client';
 import {useEffect, useState} from "react";
+import Spinner from "../Spinner";
 
 function Counter() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState<number | null>(null);
 
     useEffect(() => {
         const savedCount = localStorage.getItem('saved-count');
-        if (savedCount) setCount(Number(savedCount));
+        setCount(savedCount ? Number(savedCount) : 0);
     }, []);
 
     useEffect(() => {
-        window.localStorage.setItem('saved-count', count.toString());
+        if (count) window.localStorage.setItem('saved-count', count.toString());
     }, [count]);
 
     return (
@@ -18,7 +19,7 @@ function Counter() {
             className="count-btn"
             onClick={() => setCount(count + 1)}
         >
-            Count: {count}
+            Count: {count ? count : <Spinner/>}
         </button>
     );
 }
