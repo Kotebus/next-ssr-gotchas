@@ -17,7 +17,7 @@ function Spinner({
                 '--speed': `${speed}ms`,
                 width: size,
                 height: size,
-            } as CSSProperties as any}
+            } as CSSProperties}
         >
       <Loader color={color} size={size}/>
     </span>
